@@ -1,12 +1,35 @@
+import { Dispatch, SetStateAction } from 'react';
 import Button from './Button';
 
-interface IThirdPage {
+interface IThirdPageComponent {
     getIsExistLittlePay: (bool: boolean) => void;
+    isExistLittlePay: boolean;
+    payLittlePerson: number;
+    totalPeople: number;
+    setPayLittlePerson: Dispatch<SetStateAction<number>>;
+    setPayLittlePrice: Dispatch<SetStateAction<number>>;
+    payLittlePrice: number;
+    totalPrice: number;
 }
 
-const ThirdPage = ({ getIsExistLittlePay }: IThirdPage) => {
+const ThirdPage = ({
+    getIsExistLittlePay,
+    isExistLittlePay,
+    payLittlePerson,
+    setPayLittlePerson,
+    totalPeople,
+    setPayLittlePrice,
+    payLittlePrice,
+    totalPrice,
+}: IThirdPageComponent) => {
+    const typingPayLittlePerson = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPayLittlePerson(+event.currentTarget.value);
+    }
+    const typingPayLittlePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPayLittlePrice(+event.currentTarget.value);
+    }
     return (
-        <div className="flex flex-col justify-center items-center space-y-4 ">
+        <div className="flex flex-col justify-center text-center items-center space-y-6 ">
             <p>더치페이 인원 중 돈을 덜 내도 되는 분이 있나요?</p>
             <div className="flex justify-around w-full space-x-4">
                 <Button
@@ -26,6 +49,26 @@ const ThirdPage = ({ getIsExistLittlePay }: IThirdPage) => {
                     }
                 />
             </div>
+            {isExistLittlePay ? (
+                <div>
+                    <input
+                        type="number"
+                        className='outline-none text-right w-10'
+                        onChange={typingPayLittlePerson}
+                        value={payLittlePerson}
+                        max={totalPeople - 1}
+                    />
+                    <span>명이 각</span>
+                    <input
+                        type="number"
+                        className='outline-none text-right w-16'
+                        onChange={typingPayLittlePrice}
+                        value={payLittlePrice}
+                        max={totalPrice}
+                    />
+                    <span>원씩 덜 내도 되요</span>
+                </div>
+            ) : null}
         </div>
     )
 }

@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from 'react';
 import Button from './Button';
 
-interface ICountPeopleComponent {
+interface IFirstPageComponent {
     countPeople: number;
     setCountPeople: Dispatch<SetStateAction<number>>;
-    setIsDestineTotalPeople: Dispatch<SetStateAction<boolean>>;
+    nextPage: () => void;
 }
 
-const FirstPage = ({ countPeople, setCountPeople, setIsDestineTotalPeople }: ICountPeopleComponent) => {
+const FirstPage = ({ countPeople, setCountPeople, nextPage }: IFirstPageComponent) => {
     return (
         <div className="flex flex-col space-y-4">
             <p>총 몇 명이신가요?</p>
@@ -27,7 +27,7 @@ const FirstPage = ({ countPeople, setCountPeople, setIsDestineTotalPeople }: ICo
                     </button>
                 </div>
                 <Button
-                    onClick={() => setIsDestineTotalPeople(true)}
+                    onClick={nextPage}
                     name={`${countPeople} 명`}
                 />
             </div>

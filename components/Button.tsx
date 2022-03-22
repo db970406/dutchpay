@@ -10,9 +10,9 @@ const Button = ({ onClick, name }: IButtonComponent) => {
     return (
         <button
             className="
-                    flex justify-center items-center w-full rounded-lg bg-fuchsia-300 hover:bg-fuchsia-400 transition
-                    py-2 text-lg text-white
-                "
+                flex justify-center items-center w-full rounded-lg bg-fuchsia-300 hover:bg-fuchsia-400 transition
+                py-2 text-lg text-white
+            "
             onClick={onClick}
         >
             {typeof name === 'number' ? getPriceFormat(name) : name}
