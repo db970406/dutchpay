@@ -69,48 +69,64 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="w-screen h-screen space-x-4 flex justify-center items-center font-notoSans">
-      {page === 1 ? null : (
+    <>
+      <div className="w-screen h-screen space-x-4 flex justify-center items-center font-notoSans">
         <button
           onClick={prevPage}
-          className="text-fuchsia-300 hover:text-fuchsia-500 transition"
+          disabled={page === 1 ? true : false}
+          className={`
+            ${page === 1 ? "text-gray-300" : "text-fuchsia-300 hover:text-fuchsia-500 transition"}
+          `}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-      )}
 
-      <div>
-        {page === 1 ? (
-          <FirstPage
-            countPeople={totalPeople}
-            setCountPeople={setTotalPeople}
-            nextPage={nextPage}
-          />
-        ) : null}
-        {page === 2 ? (
-          <SecondPage
-            totalPrice={totalPrice}
-            setTotalPrice={setTotalPrice}
-            nextPage={nextPage}
-          />
-        ) : null}
-        {page === 3 ? (
-          <ThirdPage
-            getIsExistLittlePay={getIsExistLittlePay}
-            totalPeople={totalPeople}
-            isExistLittlePay={isExistLittlePay}
-            payLittlePerson={payLittlePerson}
-            setPayLittlePerson={setPayLittlePerson}
-            setPayLittlePrice={setPayLittlePrice}
-            totalPrice={totalPrice}
-            setTotalPrice={setTotalPrice}
-            payLittlePrice={payLittlePrice}
-            isSamePay={isSamePay}
-            setIsSamePay={setIsSamePay}
-          />
-        ) : null}
+
+        <div>
+          {page === 1 ? (
+            <FirstPage
+              countPeople={totalPeople}
+              setCountPeople={setTotalPeople}
+              nextPage={nextPage}
+            />
+          ) : null}
+          {page === 2 ? (
+            <SecondPage
+              totalPrice={totalPrice}
+              setTotalPrice={setTotalPrice}
+              nextPage={nextPage}
+            />
+          ) : null}
+          {page === 3 ? (
+            <ThirdPage
+              getIsExistLittlePay={getIsExistLittlePay}
+              totalPeople={totalPeople}
+              isExistLittlePay={isExistLittlePay}
+              payLittlePerson={payLittlePerson}
+              setPayLittlePerson={setPayLittlePerson}
+              setPayLittlePrice={setPayLittlePrice}
+              totalPrice={totalPrice}
+              setTotalPrice={setTotalPrice}
+              payLittlePrice={payLittlePrice}
+              isSamePay={isSamePay}
+              setIsSamePay={setIsSamePay}
+            />
+          ) : null}
+        </div>
+
+        <button
+          onClick={nextPage}
+          disabled={page === 3 ? true : false}
+          className={`
+            ${page === 3 ? "text-gray-300" : "text-fuchsia-300 hover:text-fuchsia-500 transition"}
+          `}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
 
       {totalPrice ? (
@@ -133,18 +149,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       ) : null}
-
-      {page === 3 ? null : (
-        <button
-          onClick={nextPage}
-          className="text-fuchsia-300 hover:text-fuchsia-500 transition"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      )}
-    </div>
+    </>
   )
 }
 

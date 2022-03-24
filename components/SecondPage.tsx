@@ -21,11 +21,12 @@ const SecondPage = ({ totalPrice, setTotalPrice, nextPage }: ISecondPageComponen
             <input
                 type="number"
                 className='
-                        outline-none text-center py-2 border-b-[3px] border-b-fuchsia-200
-                        focus:border-b-fuchsia-400
-                    '
+                    outline-none text-center py-2 border-b-[3px] border-b-fuchsia-200
+                    focus:border-b-fuchsia-400
+                '
                 onChange={typingTotalPrice}
-                defaultValue={totalPrice}
+                placeholder="총 지출 금액을 입력하세요"
+                defaultValue={totalPrice ? totalPrice : undefined}
             />
 
             <Button
