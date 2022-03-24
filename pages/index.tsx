@@ -69,19 +69,19 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center font-notoSans">
+    <div className="w-screen h-screen space-x-4 flex justify-center items-center font-notoSans">
       {page === 1 ? null : (
         <button
           onClick={prevPage}
           className="text-fuchsia-300 hover:text-fuchsia-500 transition"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
       )}
 
-      <div className="mx-16">
+      <div>
         {page === 1 ? (
           <FirstPage
             countPeople={totalPeople}
@@ -139,7 +139,7 @@ const Home: NextPage = () => {
           onClick={nextPage}
           className="text-fuchsia-300 hover:text-fuchsia-500 transition"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </button>

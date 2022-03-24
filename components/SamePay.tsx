@@ -33,16 +33,16 @@ const SamePay = ({
                 type="number"
                 className='outline-none text-right w-10'
                 onChange={typingPayLittlePerson}
-                value={payLittlePerson}
                 max={totalPeople - 1}
+                placeholder="0"
             />
             <span>명이 각</span>
             <input
                 type="number"
                 className='outline-none text-right w-16'
                 onChange={typingPayLittlePrice}
-                value={payLittlePrice}
                 max={totalPrice}
+                placeholder="0"
             />
             <span>원씩 덜 내도 되요</span>
         </div>
