@@ -70,14 +70,16 @@ const Home: NextPage = () => {
 
   return (
     <div className="w-screen h-screen flex justify-center items-center font-notoSans">
-      <button
-        onClick={prevPage}
-        className="text-fuchsia-300 hover:text-fuchsia-500 transition"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
+      {page === 1 ? null : (
+        <button
+          onClick={prevPage}
+          className="text-fuchsia-300 hover:text-fuchsia-500 transition"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+      )}
 
       <div className="mx-16">
         {page === 1 ? (
@@ -131,14 +133,17 @@ const Home: NextPage = () => {
           </div>
         </div>
       ) : null}
-      <button
-        onClick={nextPage}
-        className="text-fuchsia-300 hover:text-fuchsia-500 transition"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+
+      {page === 3 ? null : (
+        <button
+          onClick={nextPage}
+          className="text-fuchsia-300 hover:text-fuchsia-500 transition"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      )}
     </div>
   )
 }
