@@ -1,5 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import Button from './Button';
+import DiffPay from './DiffPay';
+import SamePay from './SamePay';
 
 interface IThirdPageComponent {
     getIsExistLittlePay: (bool: boolean) => void;
@@ -10,6 +12,9 @@ interface IThirdPageComponent {
     setPayLittlePrice: Dispatch<SetStateAction<number>>;
     payLittlePrice: number;
     totalPrice: number;
+    setTotalPrice: Dispatch<SetStateAction<number>>;
+    isSamePay: boolean;
+    setIsSamePay: Dispatch<SetStateAction<boolean>>;
 }
 
 const ThirdPage = ({
@@ -21,13 +26,22 @@ const ThirdPage = ({
     setPayLittlePrice,
     payLittlePrice,
     totalPrice,
+    isSamePay,
+    setIsSamePay
 }: IThirdPageComponent) => {
-    const typingPayLittlePerson = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPayLittlePerson(+event.currentTarget.value);
+    const getIsSamePay = (bool: boolean) => {
+        if (bool) {
+            setIsSamePay(true)
+        } else {
+            setIsSamePay(false);
+            setPayLittlePerson(0);
+            setPayLittlePrice(0);
+        }
     }
-    const typingPayLittlePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPayLittlePrice(+event.currentTarget.value);
-    }
+
+    useEffect(() => {
+        setIsSamePay(true)
+    }, [])
     return (
         <div className="flex flex-col justify-center text-center items-center space-y-6 ">
             <p>더치페이 인원 중 돈을 덜 내도 되는 분이 있나요?</p>
@@ -50,25 +64,43 @@ const ThirdPage = ({
                 />
             </div>
             {isExistLittlePay ? (
-                <div>
-                    <input
-                        type="number"
-                        className='outline-none text-right w-10'
-                        onChange={typingPayLittlePerson}
-                        value={payLittlePerson}
-                        max={totalPeople - 1}
-                    />
-                    <span>명이 각</span>
-                    <input
-                        type="number"
-                        className='outline-none text-right w-16'
-                        onChange={typingPayLittlePrice}
-                        value={payLittlePrice}
-                        max={totalPrice}
-                    />
-                    <span>원씩 덜 내도 되요</span>
-                </div>
+                <>
+                    <p>덜 내도 되는 금액이 </p>
+                    <div className="flex justify-around w-full space-x-4">
+                        <Button
+                            onClick={() => getIsSamePay(true)}
+                            name="같은 경우"
+                        />
+                        <Button
+                            onClick={() => getIsSamePay(false)}
+                            name="다른 경우"
+                        />
+                    </div>
+                    {isSamePay ? (
+                        <SamePay
+                            payLittlePerson={payLittlePerson}
+                            payLittlePrice={payLittlePrice}
+                            setPayLittlePerson={setPayLittlePerson}
+                            setPayLittlePrice={setPayLittlePrice}
+                            totalPeople={totalPeople}
+                            totalPrice={totalPrice}
+                        />
+                    ) : (
+                        <div className='flex flex-wrap gap-x-4 gap-y-16 justify-center'>
+                            {Array.from({ length: totalPeople }).map((_, index) =>
+                                <DiffPay
+                                    key={index}
+                                    totalPrice={totalPrice}
+                                    totalPeople={totalPeople}
+                                    setPayLittlePrice={setPayLittlePrice}
+                                    setPayLittlePerson={setPayLittlePerson}
+                                />
+                            )}
+                        </div>
+                    )}
+                </>
             ) : null}
+
         </div>
     )
 }

@@ -1,11 +1,13 @@
 import type { NextPage } from 'next'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FirstPage from '../components/FirstPage';
 import SecondPage from '../components/SecondPage';
 import ThirdPage from '../components/ThirdPage';
 
 export const getPriceFormat = (price: number) => {
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  const trimmedPrice = Number(price.toFixed(0));
+  const priceFormat = trimmedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return priceFormat;
 }
 
 const Home: NextPage = () => {
@@ -17,20 +19,29 @@ const Home: NextPage = () => {
 
   const [totalPrice, setTotalPrice] = useState(0);
 
-
   const [isExistLittlePay, setIsExistLittlePay] = useState(false);
   const [payLittlePerson, setPayLittlePerson] = useState(0);
   const [payLittlePrice, setPayLittlePrice] = useState(0);
+  const [isSamePay, setIsSamePay] = useState(true);
+
+  //const [countedPricePerPerson, setCountedPricePerPerson] = useState(0)
+  //`${getPriceFormat(getPricePerPerson())}`
 
   const getLittlePricePerPerson = () => {
-    const littlePrice = Number((totalPrice / totalPeople).toFixed(0)) - payLittlePrice;
-    return littlePrice < 0 ? 0 : Math.round(littlePrice / 10) * 10;
+    const littlePrice = (totalPrice / totalPeople) - payLittlePrice;
+    return littlePrice < 0 ? 0 : littlePrice;
   }
   const getPricePerPerson = () => {
     if (isExistLittlePay) {
-      return Math.round((totalPrice - (getLittlePricePerPerson() * payLittlePerson)) / (totalPeople - payLittlePerson) / 10) * 10;
+      if (isSamePay) {
+        return (totalPrice - (getLittlePricePerPerson() * payLittlePerson)) / (totalPeople - payLittlePerson);
+      } else {
+        const pay = totalPrice - (((totalPrice / totalPeople) * payLittlePerson) - payLittlePrice)
+
+        return pay / (totalPeople - payLittlePerson)
+      }
     } else {
-      return Math.round((totalPrice / totalPeople) / 10) * 10;
+      return totalPrice / totalPeople;
     }
   }
 
@@ -80,7 +91,10 @@ const Home: NextPage = () => {
             setPayLittlePerson={setPayLittlePerson}
             setPayLittlePrice={setPayLittlePrice}
             totalPrice={totalPrice}
+            setTotalPrice={setTotalPrice}
             payLittlePrice={payLittlePrice}
+            isSamePay={isSamePay}
+            setIsSamePay={setIsSamePay}
           />
         ) : null}
 
@@ -88,7 +102,7 @@ const Home: NextPage = () => {
 
       {totalPrice ? (
         <div className="fixed bottom-0 flex flex-col justify-between bg-fuchsia-200 w-full text-center">
-          {isExistLittlePay ? (
+          {isExistLittlePay && isSamePay ? (
             <div className="bg-yellow-100 py-2">
               <p
                 className="text-lg"
@@ -101,7 +115,7 @@ const Home: NextPage = () => {
             <p
               className="text-lg"
             >
-              {`${totalPeople - payLittlePerson}`}명은 각 {`${getPriceFormat(totalPeople === 0 ? totalPrice : getPricePerPerson())}`}원 입니다.
+              {`${totalPeople - payLittlePerson}`}명은 각 {`${getPriceFormat(getPricePerPerson())}`}원 입니다.
             </p>
           </div>
         </div>
