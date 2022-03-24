@@ -51,7 +51,7 @@ const ThirdPage = ({
     }, [])
     return (
         <div className="flex flex-col justify-center text-center items-center space-y-16 ">
-            <p>더치페이 인원 중 돈을 덜 내도 되는 분이 있나요?</p>
+            <p className="text-center break-words">더치페이 인원 중 돈을 덜 내도 되는 분이 있나요?</p>
             <div className="flex justify-around w-full space-x-4">
                 <Button
                     onClick={() => getIsExistLittlePay(true)}

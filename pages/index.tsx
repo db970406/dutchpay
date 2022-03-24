@@ -70,11 +70,12 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <div className="w-screen h-screen space-x-4 mx-3 flex justify-center items-center font-notoSans">
+      <div className="w-screen h-screen flex justify-center items-center font-notoSans">
         <button
           onClick={prevPage}
           disabled={page === 1 ? true : false}
           className={`
+            mx-3
             ${page === 1 ? "text-gray-300" : "text-fuchsia-300 hover:text-fuchsia-500 transition"}
           `}
         >
@@ -120,6 +121,7 @@ const Home: NextPage = () => {
           onClick={nextPage}
           disabled={page === 3 ? true : false}
           className={`
+            mx-3
             ${page === 3 ? "text-gray-300" : "text-fuchsia-300 hover:text-fuchsia-500 transition"}
           `}
         >
