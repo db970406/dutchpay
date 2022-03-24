@@ -15,7 +15,7 @@ const SecondPage = ({ totalPrice, setTotalPrice, nextPage }: ISecondPageComponen
 
     return (
         <div
-            className="flex flex-col space-y-4"
+            className="flex flex-col space-y-4 justify-center"
         >
             <p>총 금액을 얼마나 지불하셨나요?</p>
             <input

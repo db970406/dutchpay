@@ -70,7 +70,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <div className="w-screen h-screen space-x-4 flex justify-center items-center font-notoSans">
+      <div className="w-screen h-screen space-x-4 mx-3 flex justify-center items-center font-notoSans">
         <button
           onClick={prevPage}
           disabled={page === 1 ? true : false}
