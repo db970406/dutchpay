@@ -29,13 +29,20 @@ const ThirdPage = ({
     isSamePay,
     setIsSamePay
 }: IThirdPageComponent) => {
+
+    // 적게 내는 인원들 간 내야하는 금액이 같은가?
     const getIsSamePay = (bool: boolean) => {
         if (bool) {
-            setIsSamePay(true)
+            // isSamePay가 false일 때만 작동
+            return isSamePay ? null : setIsSamePay(true)
+
         } else {
-            setIsSamePay(false);
-            setPayLittlePerson(0);
-            setPayLittlePrice(0);
+            // isSamePay가 true일 때만 작동
+            if (isSamePay) {
+                setIsSamePay(false);
+                setPayLittlePerson(0);
+                setPayLittlePrice(0);
+            }
         }
     }
 
@@ -43,7 +50,7 @@ const ThirdPage = ({
         setIsSamePay(true)
     }, [])
     return (
-        <div className="flex flex-col justify-center text-center items-center space-y-6 ">
+        <div className="flex flex-col justify-center text-center items-center space-y-16 ">
             <p>더치페이 인원 중 돈을 덜 내도 되는 분이 있나요?</p>
             <div className="flex justify-around w-full space-x-4">
                 <Button
@@ -64,7 +71,7 @@ const ThirdPage = ({
                 />
             </div>
             {isExistLittlePay ? (
-                <>
+                <div className="space-y-12">
                     <p>덜 내도 되는 금액이 </p>
                     <div className="flex justify-around w-full space-x-4">
                         <Button
@@ -86,21 +93,27 @@ const ThirdPage = ({
                             totalPrice={totalPrice}
                         />
                     ) : (
-                        <div className='flex flex-wrap gap-x-4 gap-y-16 justify-center'>
-                            {Array.from({ length: totalPeople }).map((_, index) =>
-                                <DiffPay
-                                    key={index}
-                                    totalPrice={totalPrice}
-                                    totalPeople={totalPeople}
-                                    setPayLittlePrice={setPayLittlePrice}
-                                    setPayLittlePerson={setPayLittlePerson}
-                                />
-                            )}
-                        </div>
+                        <>
+                            <div className='flex flex-wrap gap-x-8 gap-y-16 justify-center'>
+                                {Array.from({ length: totalPeople }).map((_, index) =>
+                                    <DiffPay
+                                        key={index}
+                                        totalPrice={totalPrice}
+                                        lastPerson={index + 1}
+                                        totalPeople={totalPeople}
+                                        setPayLittlePrice={setPayLittlePrice}
+                                        setPayLittlePerson={setPayLittlePerson}
+                                    />
+                                )}
+                            </div>
+                            <div>
+                                <p>반드시 덜 내는 인원만 선택해주세요!</p>
+                                <p>계산 오류의 원인이 됩니다.</p>
+                            </div>
+                        </>
                     )}
-                </>
+                </div>
             ) : null}
-
         </div>
     )
 }

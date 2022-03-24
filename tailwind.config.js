@@ -4,7 +4,11 @@ module.exports = {
     "./components/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      "notoSans": ['Noto Sans KR', `sans-serif`]
+    },
+    extend: {
+    },
   },
   plugins: [],
 }

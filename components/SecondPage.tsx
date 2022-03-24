@@ -9,14 +9,15 @@ interface ISecondPageComponent {
 }
 
 const SecondPage = ({ totalPrice, setTotalPrice, nextPage }: ISecondPageComponent) => {
+
+    // 총 지출금액 입력받아 totalPrice state에 저장하는 함수
     const typingTotalPrice = (event: React.ChangeEvent<HTMLInputElement>) => setTotalPrice(+event.currentTarget.value);
 
     return (
-
         <div
             className="flex flex-col space-y-4"
         >
-            <p>총금액을 얼마나 지불하셨나요?</p>
+            <p>총 금액을 얼마나 지불하셨나요?</p>
             <input
                 type="number"
                 className='

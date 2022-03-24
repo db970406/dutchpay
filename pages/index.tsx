@@ -11,26 +11,35 @@ export const getPriceFormat = (price: number) => {
 }
 
 const Home: NextPage = () => {
+
+  // 3개의 챕터로 나눌 것이다. (인원 정하기 -> 금액 정하기 -> 금액 세부사항 정하기)
   const [page, setPage] = useState(1);
-  const nextPage = () => setPage(current => current === 3 ? 3 : current + 1)
-  const prevPage = () => setPage(current => current === 1 ? 1 : current - 1)
+  const nextPage = () => setPage(current => current === 3 ? 3 : current + 1);
+  const prevPage = () => setPage(current => current === 1 ? 1 : current - 1);
 
+  // 총 금액과 총 인원을 활용하여 계산한다.
   const [totalPeople, setTotalPeople] = useState(2);
-
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const [isExistLittlePay, setIsExistLittlePay] = useState(false);
+  // 돈을 덜내는 인원
   const [payLittlePerson, setPayLittlePerson] = useState(0);
+
+  // 돈을 덜내는 인원들의 총 금액
   const [payLittlePrice, setPayLittlePrice] = useState(0);
+
+  // 돈을 적게 내는 인원이 존재하는가?
+  const [isExistLittlePay, setIsExistLittlePay] = useState(false);
+
+  // 돈을 적게 내는 인원들 간 내야하는 금액이 동일한가?
   const [isSamePay, setIsSamePay] = useState(true);
 
-  //const [countedPricePerPerson, setCountedPricePerPerson] = useState(0)
-  //`${getPriceFormat(getPricePerPerson())}`
-
+  // 돈을 덜 내는 인원들간 그들이 낼 금액이 같은 경우 더치페이 금액
   const getLittlePricePerPerson = () => {
     const littlePrice = (totalPrice / totalPeople) - payLittlePrice;
     return littlePrice < 0 ? 0 : littlePrice;
   }
+
+  // 돈을 덜 내는 인원들을 제외한 인원들의 더치페이 금액
   const getPricePerPerson = () => {
     if (isExistLittlePay) {
       if (isSamePay) {
@@ -45,10 +54,13 @@ const Home: NextPage = () => {
     }
   }
 
+  // 돈을 적게 내는 사람이 있는가?
   const getIsExistLittlePay = (bool: boolean) => {
     if (bool) {
+      // 있다를 눌렀을 경우 돈을 적게 내는 인원의 금액 세부사항 정함
       setIsExistLittlePay(true)
     } else {
+      // 없다를 눌렀을 경우 관련 state 모두 초기화
       setIsExistLittlePay(false);
       setPayLittlePerson(0);
       setPayLittlePrice(0);
@@ -57,7 +69,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center ">
+    <div className="w-screen h-screen flex justify-center items-center font-notoSans">
       <button
         onClick={prevPage}
         className="text-fuchsia-300 hover:text-fuchsia-500 transition"
@@ -97,7 +109,6 @@ const Home: NextPage = () => {
             setIsSamePay={setIsSamePay}
           />
         ) : null}
-
       </div>
 
       {totalPrice ? (

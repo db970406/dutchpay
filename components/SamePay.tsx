@@ -16,9 +16,13 @@ const SamePay = ({
     payLittlePrice,
     totalPrice,
 }: ISamePay) => {
+
+    // 돈을 덜 내는 인원들의 수를 입력받아 payLittlePerson state에 저장
     const typingPayLittlePerson = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPayLittlePerson(+event.currentTarget.value);
     }
+
+    // 돈을 덜 내는 인원들의 금액을 입력받아 payLittlePrice state에 저장
     const typingPayLittlePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPayLittlePrice(+event.currentTarget.value);
     }
