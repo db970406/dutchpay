@@ -3,17 +3,13 @@ import { Dispatch, SetStateAction } from 'react';
 interface ISamePay {
     setPayLittlePerson: Dispatch<SetStateAction<number>>,
     setPayLittlePrice: Dispatch<SetStateAction<number>>,
-    payLittlePerson: number,
     totalPeople: number,
-    payLittlePrice: number,
     totalPrice: number,
 }
 const SamePay = ({
     setPayLittlePerson,
     setPayLittlePrice,
-    payLittlePerson,
     totalPeople,
-    payLittlePrice,
     totalPrice,
 }: ISamePay) => {
 

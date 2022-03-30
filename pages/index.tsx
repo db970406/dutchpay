@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import FirstPage from '../components/FirstPage';
 import SecondPage from '../components/SecondPage';
 import ThirdPage from '../components/ThirdPage';
@@ -70,7 +70,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <div className="w-screen h-screen flex justify-center items-center font-notoSans">
+      <div className="flex items-center justify-center w-screen h-screen font-notoSans">
         <button
           onClick={prevPage}
           disabled={page === 1 ? true : false}
@@ -79,7 +79,7 @@ const Home: NextPage = () => {
             ${page === 1 ? "text-gray-300" : "text-fuchsia-300 hover:text-fuchsia-500 transition"}
           `}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
@@ -105,12 +105,10 @@ const Home: NextPage = () => {
               getIsExistLittlePay={getIsExistLittlePay}
               totalPeople={totalPeople}
               isExistLittlePay={isExistLittlePay}
-              payLittlePerson={payLittlePerson}
               setPayLittlePerson={setPayLittlePerson}
               setPayLittlePrice={setPayLittlePrice}
               totalPrice={totalPrice}
               setTotalPrice={setTotalPrice}
-              payLittlePrice={payLittlePrice}
               isSamePay={isSamePay}
               setIsSamePay={setIsSamePay}
             />
@@ -125,16 +123,16 @@ const Home: NextPage = () => {
             ${page === 3 ? "text-gray-300" : "text-fuchsia-300 hover:text-fuchsia-500 transition"}
           `}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </button>
       </div>
 
       {totalPrice ? (
-        <div className="fixed bottom-0 flex flex-col justify-between bg-fuchsia-200 w-full text-center">
+        <div className="fixed bottom-0 flex flex-col justify-between w-full text-center bg-fuchsia-200">
           {isExistLittlePay && isSamePay ? (
-            <div className="bg-yellow-100 py-2">
+            <div className="py-2 bg-yellow-100">
               <p
                 className="text-lg"
               >
