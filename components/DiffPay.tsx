@@ -51,12 +51,12 @@ const DiffPay = ({
                 <input
                     type="number"
                     max={totalPeople / totalPrice}
-                    className="outline-none text-center placeholder:text-xs"
+                    className="text-center outline-none placeholder:text-xs"
                     onChange={onChange}
                     onBlur={onBlur}
                     placeholder="덜내는 돈"
                 />
-                <p>{getPriceFormat(((totalPrice / totalPeople) - individualPay))}</p>
+                <span>{getPriceFormat(((totalPrice / totalPeople) - individualPay))}원</span>
             </div>
         ) : (
             <div className="flex flex-col ">
