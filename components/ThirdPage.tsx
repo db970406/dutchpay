@@ -46,7 +46,7 @@ const ThirdPage = ({
         setIsSamePay(true)
     }, [])
     return (
-        <div className="flex flex-col items-center justify-center space-y-16 text-center ">
+        <div className="flex flex-col items-center justify-center space-y-8 text-center ">
             <p className="text-center break-words">더치페이 인원 중 돈을 덜 내도 되는 분이 있나요?</p>
             <div className="flex justify-around w-full space-x-4">
                 <Button
